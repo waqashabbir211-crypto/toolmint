@@ -1,0 +1,121 @@
+<section class="tm-word-counter">
+
+<div class="tm-header">
+<h2 id="tm-page-title">Word Counter Tool</h2>
+<p class="tm-subtitle">Count words, characters, and more in real-time</p>
+</div>
+
+<div class="tm-toolbar" role="toolbar" aria-label="Word counter toolbar">
+<button id="tm-btn-clear" class="tm-button tm-button-primary" aria-label="Clear all text">Clear</button>
+<button id="tm-btn-copy" class="tm-button tm-button-secondary" aria-label="Copy statistics to clipboard">Copy Stats</button>
+<button id="tm-btn-download" class="tm-button tm-button-secondary" aria-label="Download report">Download</button>
+<button id="tm-btn-settings" class="tm-button tm-button-tertiary" aria-label="Open settings">Settings</button>
+<button id="tm-btn-help" class="tm-button tm-button-tertiary" aria-label="Open help and keyboard shortcuts">Help</button>
+</div>
+
+<div class="tm-main-content">
+
+<div class="tm-textarea-wrapper">
+<label for="tm-textarea" class="tm-label">Enter or paste your text here</label>
+<textarea
+id="tm-textarea"
+class="tm-textarea"
+placeholder="Start typing or paste text to count words, characters, and sentences..."
+aria-describedby="tm-character-limit tm-textarea-help"
+spellcheck="true">
+</textarea>
+<p id="tm-textarea-help" class="tm-help-text">Keyboard shortcut: Press Ctrl+K to focus this field</p>
+
+<div class="tm-drag-drop-overlay" id="tm-drag-drop-area" aria-label="Drag and drop text file here to load content">
+<p class="tm-drag-drop-text">Drag and drop a text file here</p>
+</div>
+</div>
+
+<div class="tm-character-limit" id="tm-character-limit" aria-live="polite" aria-atomic="true">
+<div class="tm-limit-bar">
+<div class="tm-limit-progress" id="tm-limit-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5000" aria-label="Character limit progress"></div>
+</div>
+<p class="tm-limit-text"><span id="tm-char-count">0</span> / <span id="tm-char-limit">5000</span> characters</p>
+</div>
+
+<div class="tm-statistics" role="region" aria-label="Text statistics">
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Words</h3>
+<p id="tm-stat-words" class="tm-stat-value" aria-label="Word count">0</p>
+</article>
+
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Characters</h3>
+<p id="tm-stat-characters" class="tm-stat-value" aria-label="Character count">0</p>
+</article>
+
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Spaces</h3>
+<p id="tm-stat-spaces" class="tm-stat-value" aria-label="Space count">0</p>
+</article>
+
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Sentences</h3>
+<p id="tm-stat-sentences" class="tm-stat-value" aria-label="Sentence count">0</p>
+</article>
+
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Paragraphs</h3>
+<p id="tm-stat-paragraphs" class="tm-stat-value" aria-label="Paragraph count">0</p>
+</article>
+
+<article class="tm-stat-card">
+<h3 class="tm-stat-label">Read Time</h3>
+<p id="tm-stat-readtime" class="tm-stat-value" aria-label="Estimated reading time">0 min</p>
+</article>
+</div>
+
+</div>
+
+<aside class="tm-shortcuts" role="region" aria-label="Keyboard shortcuts">
+<h3 class="tm-shortcuts-title">Keyboard Shortcuts</h3>
+<ul class="tm-shortcuts-list">
+<li class="tm-shortcut-item">
+<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">K</kbd>
+<span class="tm-shortcut-description">Focus text area</span>
+</li>
+<li class="tm-shortcut-item">
+<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">Enter</kbd>
+<span class="tm-shortcut-description">Copy statistics</span>
+</li>
+<li class="tm-shortcut-item">
+<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">L</kbd>
+<span class="tm-shortcut-description">Clear text</span>
+</li>
+</ul>
+</aside>
+
+<div class="tm-toast-container" id="tm-toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+<div id="tm-modal" class="tm-modal" role="dialog" aria-labelledby="tm-modal-title" aria-hidden="true">
+<div class="tm-modal-overlay" id="tm-modal-overlay"></div>
+<article class="tm-modal-content">
+<div class="tm-modal-header">
+<h3 id="tm-modal-title" class="tm-modal-title">Settings</h3>
+<button id="tm-modal-close" class="tm-modal-close" aria-label="Close dialog">×</button>
+</div>
+<div class="tm-modal-body">
+<div class="tm-setting-item">
+<label for="tm-setting-limit" class="tm-setting-label">Character Limit</label>
+<input type="number" id="tm-setting-limit" class="tm-setting-input" min="100" max="50000" value="5000" aria-label="Set character limit">
+</div>
+<div class="tm-setting-item">
+<label for="tm-setting-readspeed" class="tm-setting-label">Reading Speed (words per minute)</label>
+<input type="number" id="tm-setting-readspeed" class="tm-setting-input" min="100" max="500" value="200" aria-label="Set reading speed">
+</div>
+</div>
+<div class="tm-modal-footer">
+<button id="tm-modal-save" class="tm-button tm-button-primary" aria-label="Save settings">Save</button>
+<button id="tm-modal-cancel" class="tm-button tm-button-secondary" aria-label="Cancel and close dialog">Cancel</button>
+</div>
+</article>
+</div>
+
+<div class="tm-sr-only" role="region" aria-live="polite" aria-atomic="true" id="tm-screen-reader-announcements"></div>
+
+</section>
