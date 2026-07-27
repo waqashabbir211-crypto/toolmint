@@ -127,9 +127,51 @@ spellcheck="true">
 </article>
 </div>
 
+<div id="tm-help-modal" class="tm-modal" role="dialog" aria-hidden="true" aria-labelledby="tm-help-title">
+  <div id="tm-help-modal-overlay" class="tm-modal-overlay"></div>
+  <article class="tm-modal-content">
+    <div class="tm-modal-header">
+      <h2 id="tm-help-title">Help & Keyboard Shortcuts</h2>
+      <button id="tm-help-modal-close" class="tm-modal-close" aria-label="Close help modal">×</button>
+    </div>
+    <div class="tm-modal-body">
+      <section class="tm-help-section">
+        <h3>Keyboard Shortcuts</h3>
+        <ul>
+          <li><strong>Ctrl + K</strong> → Focus text area</li>
+          <li><strong>Ctrl + Enter</strong> → Copy statistics</li>
+          <li><strong>Ctrl + L</strong> → Clear text</li>
+        </ul>
+      </section>
+      <section class="tm-help-section">
+        <h3>How to Use</h3>
+        <ol>
+          <li>Type or paste text.</li>
+          <li>Statistics update automatically.</li>
+          <li>Copy your statistics.</li>
+          <li>Download text as TXT.</li>
+          <li>Change settings anytime.</li>
+        </ol>
+      </section>
+      <section class="tm-help-section">
+        <h3>Tips</h3>
+        <ul>
+          <li>Drag & Drop TXT files.</li>
+          <li>Character limit is customizable.</li>
+          <li>Reading time is estimated.</li>
+          <li>Everything works offline.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="tm-modal-footer">
+      <button id="tm-help-close-btn" class="tm-button tm-button-primary">Close</button>
+    </div>
+  </article>
+</div>
+
 <div class="tm-sr-only" role="region" aria-live="polite" aria-atomic="true" id="tm-screen-reader-announcements"></div>
 
-</section>
+  </section>
   <script src="script.js"></script>
 
 </body>
