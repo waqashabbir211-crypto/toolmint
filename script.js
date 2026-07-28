@@ -40,12 +40,14 @@
     screenReaderAnnouncements: null,
     limitBar: null,
     helpModal: null,
-    helpModalOverlay: null,
-    helpModalClose: null
-  };
+     helpModalOverlay: null,
+helpModalClose: null,
+helpCloseBtn: null
+};
 
-  function cacheDOM() {
-    DOM.textarea = document.getElementById('tm-textarea');
+function cacheDOM() {
+  DOM.textarea = document.getElementById('tm-textarea');
+    
     DOM.charCount = document.getElementById('tm-char-count');
     DOM.charLimit = document.getElementById('tm-char-limit');
     DOM.limitProgress = document.getElementById('tm-limit-progress');
@@ -75,6 +77,7 @@
     DOM.helpModal = document.getElementById('tm-help-modal');
     DOM.helpModalOverlay = document.getElementById('tm-help-modal-overlay');
     DOM.helpModalClose = document.getElementById('tm-help-modal-close');
+  DOM.helpCloseBtn = document.getElementById('tm-help-close-btn');
   }
 
   function loadSettings() {
