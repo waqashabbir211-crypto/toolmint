@@ -42,7 +42,7 @@
     helpModal: null,
      helpModalOverlay: null,
 helpModalClose: null,
-helpCloseBtn: null
+    helpCloseBtn: null,
 };
 
 function cacheDOM() {
@@ -460,8 +460,13 @@ Read Time: ${DOM.statReadtime.textContent}`;
     }
 
     if (DOM.helpModal) {
-      if (DOM.helpModalClose) {
-        DOM.helpModalClose.addEventListener('click', closeHelpModal);
+     if (DOM.helpModalClose) {
+    DOM.helpModalClose.addEventListener('click', closeHelpModal);
+}
+
+if (DOM.helpCloseBtn) {
+    DOM.helpCloseBtn.addEventListener('click', closeHelpModal);
+}
       }
       if (DOM.helpModalOverlay) {
         DOM.helpModalOverlay.addEventListener('click', (e) => {
