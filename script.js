@@ -456,49 +456,34 @@ Read Time: ${DOM.statReadtime.textContent}`;
             }
           }
         }
+        }
       });
     }
+if (DOM.helpModal) {
 
-    if (DOM.helpModal) {
-     if (DOM.helpModalClose) {
-    DOM.helpModalClose.addEventListener('click', closeHelpModal);
-}
+    if (DOM.helpModalClose) {
+        DOM.helpModalClose.addEventListener('click', closeHelpModal);
+    }
 
-if (DOM.helpCloseBtn) {
-    DOM.helpCloseBtn.addEventListener('click', closeHelpModal);
-}
-      }
-      if (DOM.helpModalOverlay) {
+    if (DOM.helpCloseBtn) {
+        DOM.helpCloseBtn.addEventListener('click', closeHelpModal);
+    }
+
+    if (DOM.helpModalOverlay) {
         DOM.helpModalOverlay.addEventListener('click', (e) => {
-          if (e.target === DOM.helpModalOverlay) {
-            closeHelpModal();
-          }
+            if (e.target === DOM.helpModalOverlay) {
+                closeHelpModal();
+            }
         });
-      }
-      DOM.helpModal.addEventListener('keydown', (e) => {
+    }
+
+    DOM.helpModal.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          e.preventDefault();
-          closeHelpModal();
+            e.preventDefault();
+            closeHelpModal();
         }
-
-        if (e.key === 'Tab') {
-          const focusableElements = DOM.helpModal.querySelectorAll('button, [tabindex]');
-          const firstElement = focusableElements[0];
-          const lastElement = focusableElements[focusableElements.length - 1];
-
-          if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-              e.preventDefault();
-              if (lastElement) lastElement.focus();
-            }
-          } else {
-            if (document.activeElement === lastElement) {
-              e.preventDefault();
-              if (firstElement) firstElement.focus();
-            }
-          }
-        }
-      });
+    });
+}
     }
 
     if (DOM.settingLimit) {
@@ -517,7 +502,6 @@ if (DOM.helpCloseBtn) {
       });
     }
   }
-
   function showHelpModal() {
     const helpContent = `Keyboard Shortcuts:
 Ctrl+K - Focus text area
