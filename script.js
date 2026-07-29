@@ -40,14 +40,14 @@
     screenReaderAnnouncements: null,
     limitBar: null,
     helpModal: null,
-     helpModalOverlay: null,
-helpModalClose: null,
+    helpModalOverlay: null,
+    helpModalClose: null,
     helpCloseBtn: null,
-};
+  };
 
-function cacheDOM() {
-  DOM.textarea = document.getElementById('tm-textarea');
-    
+  function cacheDOM() {
+    DOM.textarea = document.getElementById('tm-textarea');
+
     DOM.charCount = document.getElementById('tm-char-count');
     DOM.charLimit = document.getElementById('tm-char-limit');
     DOM.limitProgress = document.getElementById('tm-limit-progress');
@@ -77,7 +77,7 @@ function cacheDOM() {
     DOM.helpModal = document.getElementById('tm-help-modal');
     DOM.helpModalOverlay = document.getElementById('tm-help-modal-overlay');
     DOM.helpModalClose = document.getElementById('tm-help-modal-close');
-  DOM.helpCloseBtn = document.getElementById('tm-help-close-btn');
+    DOM.helpCloseBtn = document.getElementById('tm-help-close-btn');
   }
 
   function loadSettings() {
@@ -456,34 +456,32 @@ Read Time: ${DOM.statReadtime.textContent}`;
             }
           }
         }
-        }
       });
     }
-if (DOM.helpModal) {
 
-    if (DOM.helpModalClose) {
+    if (DOM.helpModal) {
+      if (DOM.helpModalClose) {
         DOM.helpModalClose.addEventListener('click', closeHelpModal);
-    }
+      }
 
-    if (DOM.helpCloseBtn) {
+      if (DOM.helpCloseBtn) {
         DOM.helpCloseBtn.addEventListener('click', closeHelpModal);
-    }
+      }
 
-    if (DOM.helpModalOverlay) {
+      if (DOM.helpModalOverlay) {
         DOM.helpModalOverlay.addEventListener('click', (e) => {
-            if (e.target === DOM.helpModalOverlay) {
-                closeHelpModal();
-            }
-        });
-    }
-
-    DOM.helpModal.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            e.preventDefault();
+          if (e.target === DOM.helpModalOverlay) {
             closeHelpModal();
+          }
+        });
+      }
+
+      DOM.helpModal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeHelpModal();
         }
-    });
-}
+      });
     }
 
     if (DOM.settingLimit) {
@@ -502,6 +500,7 @@ if (DOM.helpModal) {
       });
     }
   }
+
   function showHelpModal() {
     const helpContent = `Keyboard Shortcuts:
 Ctrl+K - Focus text area
