@@ -917,3 +917,13 @@ color: #000000;
 page-break-inside: avoid;
 }
 }
+.tm-hero{
+    min-height:600px;
+    background:linear-gradient(180deg,#ffffff,#F8FAFC);
+    display:flex;
+    align-items:center;
+}
+
+.tm-hero .tm-container{
+    text-align:center;
+}
