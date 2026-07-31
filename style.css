@@ -927,3 +927,10 @@ page-break-inside: avoid;
 .tm-hero .tm-container{
     text-align:center;
 }
+.tm-hero-title{
+    font-size:56px;
+    font-weight:800;
+    color:#111827;
+    text-align:center;
+    margin:0;
+}
