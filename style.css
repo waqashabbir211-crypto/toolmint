@@ -68,11 +68,6 @@ body{
     text-decoration:none;
     font-weight:700;
 }
-
-.tm-site-main{
-    padding:40px 0;
-}
-}
 .tm-word-counter {
 --tm-primary: #6366f1;
 --tm-primary-dark: #4f46e5;
