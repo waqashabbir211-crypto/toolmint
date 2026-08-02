@@ -3,219 +3,616 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolMint - Word Counter</title>
-
+    <meta name="description" content="ToolMint: 100+ free online tools for text processing, SEO, writing, grammar, images, development, calculations, and conversions. Fast, simple, and powerful. No signup required.">
+    <title>ToolMint - Free Online Tools for Every Task</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
 </head>
 
 <body>
-    <header class="tm-site-header">
-  <div class="tm-container">
+    <!-- HEADER / NAVBAR -->
+    <header class="tm-header">
+        <div class="tm-container">
+            <div class="tm-header-wrapper">
+                <a href="#" class="tm-logo">ToolMint</a>
+                
+                <nav class="tm-nav" id="tm-nav-main">
+                    <a href="#" class="tm-nav-link">Home</a>
+                    <a href="#tools" class="tm-nav-link">Tools</a>
+                    <a href="#categories" class="tm-nav-link">Categories</a>
+                    <a href="#" class="tm-nav-link">Blog</a>
+                    <a href="#" class="tm-nav-link">About</a>
+                    <a href="#" class="tm-nav-link">Contact</a>
+                </nav>
 
-    <a href="#" class="tm-logo">
-      ToolMint
-    </a>
+                <button class="tm-btn-all-tools" id="tm-btn-all-tools">All Tools</button>
 
-    <nav class="tm-nav">
-      <a href="#">Home</a>
-      <a href="#">Tools</a>
-      <a href="#">Categories</a>
-      <a href="#">Blog</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
+                <button class="tm-mobile-menu-btn" id="tm-mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-    <a href="#" class="tm-header-btn">
-      All Tools
-    </a>
+    <main class="tm-main">
+        <!-- HERO SECTION -->
+        <section class="tm-hero" id="tm-hero">
+            <div class="tm-container">
+                <div class="tm-hero-badge">
+                    ⭐ 100+ Free Online Tools
+                </div>
+                
+                <h1 class="tm-hero-title">
+                    Fast. Simple. Powerful.<br>
+                    <span>All Tools in One Place.</span>
+                </h1>
+                
+                <p class="tm-hero-description">
+                    ToolMint provides a comprehensive collection of free online tools to make your daily work easier, faster, and smarter. No signup required.
+                </p>
 
-  </div>
-</header>
+                <div class="tm-hero-search">
+                    <input 
+                        type="text" 
+                        class="tm-search-input" 
+                        id="tm-hero-search-input" 
+                        placeholder="Search any tool..."
+                        aria-label="Search tools"
+                    >
+                    <button class="tm-btn-search" id="tm-btn-hero-search">Search</button>
+                </div>
 
-<main class="tm-site-main">
-    <section class="tm-hero">
-  <div class="tm-container">
-<h1 class="tm-hero-title">
-Fast. Simple. Powerful.<br>
-<span>All Tools in One Place.</span>
-</h1>
-      <p class="tm-hero-text">
-ToolMint provides 100+ free online tools to make your daily work easier,
-faster and smarter.
-</p>
-      <div class="tm-hero-search">
-    <input type="text" class="tm-search-input" placeholder="Search any tool...">
-    <button class="tm-search-btn">Search</button>
-</div>
-  </div>
-</section>
-<section class="tm-word-counter">
-<div class="tm-header">
-<h2 id="tm-page-title">Word Counter Tool</h2>
-<p class="tm-subtitle">Count words, characters, and more in real-time</p>
-</div>
+                <div class="tm-hero-trust-indicators">
+                    <div class="tm-trust-item">
+                        <span class="tm-trust-icon">✓</span>
+                        <span class="tm-trust-text">Free to Use</span>
+                    </div>
+                    <div class="tm-trust-item">
+                        <span class="tm-trust-icon">✓</span>
+                        <span class="tm-trust-text">No Signup Required</span>
+                    </div>
+                    <div class="tm-trust-item">
+                        <span class="tm-trust-icon">✓</span>
+                        <span class="tm-trust-text">Fast & Secure</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="tm-toolbar" role="toolbar" aria-label="Word counter toolbar">
-<button id="tm-btn-clear" class="tm-button tm-button-primary" aria-label="Clear all text">Clear</button>
-<button id="tm-btn-copy" class="tm-button tm-button-secondary" aria-label="Copy statistics to clipboard">Copy Stats</button>
-<button id="tm-btn-download" class="tm-button tm-button-secondary" aria-label="Download report">Download</button>
-<button id="tm-btn-settings" class="tm-button tm-button-tertiary" aria-label="Open settings">Settings</button>
-<button id="tm-btn-help" class="tm-button tm-button-tertiary" aria-label="Open help and keyboard shortcuts">Help</button>
-</div>
+        <!-- POPULAR TOOLS SECTION -->
+        <section class="tm-popular-tools" id="tools">
+            <div class="tm-container">
+                <div class="tm-section-header">
+                    <h2 class="tm-section-title">Popular Tools</h2>
+                    <p class="tm-section-description">Most used and loved tools by our community</p>
+                </div>
 
-<div class="tm-main-content">
+                <div class="tm-tools-grid">
+                    <article class="tm-tool-card" data-tool-category="text" data-tool-id="word-counter">
+                        <div class="tm-tool-icon">📝</div>
+                        <h3 class="tm-tool-name">Word Counter</h3>
+                        <p class="tm-tool-description">Count words, characters, sentences, and paragraphs instantly</p>
+                        <span class="tm-tool-category">Text Tools</span>
+                        <a href="#word-counter" class="tm-tool-link">Use Tool →</a>
+                    </article>
 
-<div class="tm-textarea-wrapper">
-<label for="tm-textarea" class="tm-label">Enter or paste your text here</label>
-<textarea
-id="tm-textarea"
-class="tm-textarea"
-placeholder="Start typing or paste text to count words, characters, and sentences..."
-aria-describedby="tm-character-limit tm-textarea-help"
-spellcheck="true">
-</textarea>
-<p id="tm-textarea-help" class="tm-help-text">Keyboard shortcut: Press Ctrl+K to focus this field</p>
+                    <article class="tm-tool-card" data-tool-category="text" data-tool-id="character-counter">
+                        <div class="tm-tool-icon">🔤</div>
+                        <h3 class="tm-tool-name">Character Counter</h3>
+                        <p class="tm-tool-description">Count characters with and without spaces</p>
+                        <span class="tm-tool-category">Text Tools</span>
+                        <a href="#" class="tm-tool-link">Use Tool →</a>
+                    </article>
 
-<div class="tm-drag-drop-overlay" id="tm-drag-drop-area" aria-label="Drag and drop text file here to load content">
-<p class="tm-drag-drop-text">Drag and drop a text file here</p>
-</div>
-</div>
+                    <article class="tm-tool-card" data-tool-category="text" data-tool-id="case-converter">
+                        <div class="tm-tool-icon">Aa</div>
+                        <h3 class="tm-tool-name">Case Converter</h3>
+                        <p class="tm-tool-description">Convert text to uppercase, lowercase, title case, and more</p>
+                        <span class="tm-tool-category">Text Tools</span>
+                        <a href="#" class="tm-tool-link">Use Tool →</a>
+                    </article>
 
-<div class="tm-character-limit" id="tm-character-limit" aria-live="polite" aria-atomic="true">
-<div class="tm-limit-bar">
-<div class="tm-limit-progress" id="tm-limit-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5000" aria-label="Character limit progress"></div>
-</div>
-<p class="tm-limit-text"><span id="tm-char-count">0</span> / <span id="tm-char-limit">5000</span> characters</p>
-</div>
+                    <article class="tm-tool-card" data-tool-category="writing" data-tool-id="grammar-checker">
+                        <div class="tm-tool-icon">✍️</div>
+                        <h3 class="tm-tool-name">Grammar Checker</h3>
+                        <p class="tm-tool-description">Check grammar, spelling, and punctuation in real-time</p>
+                        <span class="tm-tool-category">Writing Tools</span>
+                        <a href="#" class="tm-tool-link">Use Tool →</a>
+                    </article>
 
-<div class="tm-statistics" role="region" aria-label="Text statistics">
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Words</h3>
-<p id="tm-stat-words" class="tm-stat-value" aria-label="Word count">0</p>
-</article>
+                    <article class="tm-tool-card" data-tool-category="seo" data-tool-id="keyword-density">
+                        <div class="tm-tool-icon">🎯</div>
+                        <h3 class="tm-tool-name">Keyword Density Checker</h3>
+                        <p class="tm-tool-description">Analyze keyword density in your content for SEO</p>
+                        <span class="tm-tool-category">SEO Tools</span>
+                        <a href="#" class="tm-tool-link">Use Tool →</a>
+                    </article>
 
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Characters</h3>
-<p id="tm-stat-characters" class="tm-stat-value" aria-label="Character count">0</p>
-</article>
+                    <article class="tm-tool-card" data-tool-category="text" data-tool-id="text-cleaner">
+                        <div class="tm-tool-icon">🧹</div>
+                        <h3 class="tm-tool-name">Text Cleaner</h3>
+                        <p class="tm-tool-description">Remove extra spaces, line breaks, and format text</p>
+                        <span class="tm-tool-category">Text Tools</span>
+                        <a href="#" class="tm-tool-link">Use Tool →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Spaces</h3>
-<p id="tm-stat-spaces" class="tm-stat-value" aria-label="Space count">0</p>
-</article>
+        <!-- TOOL CATEGORIES SECTION -->
+        <section class="tm-categories" id="categories">
+            <div class="tm-container">
+                <div class="tm-section-header">
+                    <h2 class="tm-section-title">Explore Tools by Category</h2>
+                    <p class="tm-section-description">Find the perfect tool for your needs</p>
+                </div>
 
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Sentences</h3>
-<p id="tm-stat-sentences" class="tm-stat-value" aria-label="Sentence count">0</p>
-</article>
+                <div class="tm-categories-grid">
+                    <a href="#" class="tm-category-card" data-category="text-tools">
+                        <div class="tm-category-icon">📄</div>
+                        <h3 class="tm-category-title">Text Tools</h3>
+                        <p class="tm-category-description">Word counters, text formatters, and more</p>
+                        <span class="tm-category-count">12 tools</span>
+                    </a>
 
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Paragraphs</h3>
-<p id="tm-stat-paragraphs" class="tm-stat-value" aria-label="Paragraph count">0</p>
-</article>
+                    <a href="#" class="tm-category-card" data-category="seo-tools">
+                        <div class="tm-category-icon">🔍</div>
+                        <h3 class="tm-category-title">SEO Tools</h3>
+                        <p class="tm-category-description">Keyword analysis and SEO utilities</p>
+                        <span class="tm-category-count">8 tools</span>
+                    </a>
 
-<article class="tm-stat-card">
-<h3 class="tm-stat-label">Read Time</h3>
-<p id="tm-stat-readtime" class="tm-stat-value" aria-label="Estimated reading time">0 min</p>
-</article>
-</div>
+                    <a href="#" class="tm-category-card" data-category="writing-tools">
+                        <div class="tm-category-icon">✒️</div>
+                        <h3 class="tm-category-title">Writing Tools</h3>
+                        <p class="tm-category-description">Grammar checkers and writing aids</p>
+                        <span class="tm-category-count">10 tools</span>
+                    </a>
 
-</div>
+                    <a href="#" class="tm-category-card" data-category="grammar-tools">
+                        <div class="tm-category-icon">✓</div>
+                        <h3 class="tm-category-title">Grammar Tools</h3>
+                        <p class="tm-category-description">Spelling and grammar correction</p>
+                        <span class="tm-category-count">6 tools</span>
+                    </a>
 
-<aside class="tm-shortcuts" role="region" aria-label="Keyboard shortcuts">
-<h3 class="tm-shortcuts-title">Keyboard Shortcuts</h3>
-<ul class="tm-shortcuts-list">
-<li class="tm-shortcut-item">
-<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">K</kbd>
-<span class="tm-shortcut-description">Focus text area</span>
-</li>
-<li class="tm-shortcut-item">
-<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">Enter</kbd>
-<span class="tm-shortcut-description">Copy statistics</span>
-</li>
-<li class="tm-shortcut-item">
-<kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">L</kbd>
-<span class="tm-shortcut-description">Clear text</span>
-</li>
-</ul>
-</aside>
+                    <a href="#" class="tm-category-card" data-category="image-tools">
+                        <div class="tm-category-icon">🖼️</div>
+                        <h3 class="tm-category-title">Image Tools</h3>
+                        <p class="tm-category-description">Image editing and conversion tools</p>
+                        <span class="tm-category-count">9 tools</span>
+                    </a>
 
-<div class="tm-toast-container" id="tm-toast-container" aria-live="assertive" aria-atomic="true"></div>
+                    <a href="#" class="tm-category-card" data-category="developer-tools">
+                        <div class="tm-category-icon">💻</div>
+                        <h3 class="tm-category-title">Developer Tools</h3>
+                        <p class="tm-category-description">Code converters and formatters</p>
+                        <span class="tm-category-count">15 tools</span>
+                    </a>
 
-<div id="tm-modal" class="tm-modal" role="dialog" aria-labelledby="tm-modal-title" aria-hidden="true">
-<div class="tm-modal-overlay" id="tm-modal-overlay"></div>
-<article class="tm-modal-content">
-<div class="tm-modal-header">
-<h3 id="tm-modal-title" class="tm-modal-title">Settings</h3>
-<button id="tm-modal-close" class="tm-modal-close" aria-label="Close dialog">×</button>
-</div>
-<div class="tm-modal-body">
-<div class="tm-setting-item">
-<label for="tm-setting-limit" class="tm-setting-label">Character Limit</label>
-<input type="number" id="tm-setting-limit" class="tm-setting-input" min="100" max="50000" value="5000" aria-label="Set character limit">
-</div>
-<div class="tm-setting-item">
-<label for="tm-setting-readspeed" class="tm-setting-label">Reading Speed (words per minute)</label>
-<input type="number" id="tm-setting-readspeed" class="tm-setting-input" min="100" max="500" value="200" aria-label="Set reading speed">
-</div>
-</div>
-<div class="tm-modal-footer">
-<button id="tm-modal-save" class="tm-button tm-button-primary" aria-label="Save settings">Save</button>
-<button id="tm-modal-cancel" class="tm-button tm-button-secondary" aria-label="Cancel and close dialog">Cancel</button>
-</div>
-</article>
-</div>
+                    <a href="#" class="tm-category-card" data-category="calculators">
+                        <div class="tm-category-icon">🧮</div>
+                        <h3 class="tm-category-title">Calculators</h3>
+                        <p class="tm-category-description">Various calculation utilities</p>
+                        <span class="tm-category-count">11 tools</span>
+                    </a>
 
-<div id="tm-help-modal" class="tm-modal" role="dialog" aria-hidden="true" aria-labelledby="tm-help-title">
-  <div id="tm-help-modal-overlay" class="tm-modal-overlay"></div>
-  <article class="tm-modal-content">
-    <div class="tm-modal-header">
-      <h2 id="tm-help-title">Help & Keyboard Shortcuts</h2>
-      <button id="tm-help-modal-close" class="tm-modal-close" aria-label="Close help modal">×</button>
+                    <a href="#" class="tm-category-card" data-category="converters">
+                        <div class="tm-category-icon">⇄</div>
+                        <h3 class="tm-category-title">Conversion Tools</h3>
+                        <p class="tm-category-description">Unit and file converters</p>
+                        <span class="tm-category-count">13 tools</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORD COUNTER TOOL SECTION -->
+        <section class="tm-word-counter-section" id="word-counter">
+            <div class="tm-container">
+                <div class="tm-tool-header">
+                    <h2 class="tm-tool-title">Word Counter Tool</h2>
+                    <p class="tm-tool-subtitle">Count words, characters, and more in real-time</p>
+                </div>
+
+                <div class="tm-toolbar" role="toolbar" aria-label="Word counter toolbar">
+                    <button id="tm-btn-clear" class="tm-button tm-button-primary" aria-label="Clear all text">Clear</button>
+                    <button id="tm-btn-copy" class="tm-button tm-button-secondary" aria-label="Copy statistics to clipboard">Copy Stats</button>
+                    <button id="tm-btn-download" class="tm-button tm-button-secondary" aria-label="Download text as file">Download</button>
+                    <button id="tm-btn-settings" class="tm-button tm-button-tertiary" aria-label="Open settings">Settings</button>
+                    <button id="tm-btn-help" class="tm-button tm-button-tertiary" aria-label="Open help and keyboard shortcuts">Help</button>
+                </div>
+
+                <div class="tm-tool-content">
+                    <div class="tm-textarea-wrapper">
+                        <label for="tm-textarea" class="tm-label">Enter or paste your text here</label>
+                        <textarea
+                            id="tm-textarea"
+                            class="tm-textarea"
+                            placeholder="Start typing or paste text to count words, characters, and sentences..."
+                            aria-describedby="tm-textarea-help tm-character-limit"
+                            spellcheck="true"
+                        ></textarea>
+                        <p id="tm-textarea-help" class="tm-help-text">Keyboard shortcut: Press Ctrl+K to focus this field</p>
+
+                        <div class="tm-drag-drop-overlay" id="tm-drag-drop-area" aria-label="Drag and drop text file here to load content">
+                            <p class="tm-drag-drop-text">Drag and drop a text file here</p>
+                        </div>
+                    </div>
+
+                    <div class="tm-character-limit" id="tm-character-limit" aria-live="polite" aria-atomic="true">
+                        <div class="tm-limit-bar">
+                            <div class="tm-limit-progress" id="tm-limit-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5000" aria-label="Character limit progress"></div>
+                        </div>
+                        <p class="tm-limit-text"><span id="tm-char-count">0</span> / <span id="tm-char-limit">5000</span> characters</p>
+                    </div>
+
+                    <div class="tm-statistics" role="region" aria-label="Text statistics">
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Words</h3>
+                            <p id="tm-stat-words" class="tm-stat-value" aria-label="Word count">0</p>
+                        </article>
+
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Characters</h3>
+                            <p id="tm-stat-characters" class="tm-stat-value" aria-label="Character count">0</p>
+                        </article>
+
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Spaces</h3>
+                            <p id="tm-stat-spaces" class="tm-stat-value" aria-label="Space count">0</p>
+                        </article>
+
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Sentences</h3>
+                            <p id="tm-stat-sentences" class="tm-stat-value" aria-label="Sentence count">0</p>
+                        </article>
+
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Paragraphs</h3>
+                            <p id="tm-stat-paragraphs" class="tm-stat-value" aria-label="Paragraph count">0</p>
+                        </article>
+
+                        <article class="tm-stat-card">
+                            <h3 class="tm-stat-label">Read Time</h3>
+                            <p id="tm-stat-readtime" class="tm-stat-value" aria-label="Estimated reading time">0 min</p>
+                        </article>
+                    </div>
+                </div>
+
+                <aside class="tm-shortcuts" role="region" aria-label="Keyboard shortcuts">
+                    <h3 class="tm-shortcuts-title">Keyboard Shortcuts</h3>
+                    <ul class="tm-shortcuts-list">
+                        <li class="tm-shortcut-item">
+                            <kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">K</kbd>
+                            <span class="tm-shortcut-description">Focus text area</span>
+                        </li>
+                        <li class="tm-shortcut-item">
+                            <kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">Enter</kbd>
+                            <span class="tm-shortcut-description">Copy statistics</span>
+                        </li>
+                        <li class="tm-shortcut-item">
+                            <kbd class="tm-key">Ctrl</kbd> + <kbd class="tm-key">L</kbd>
+                            <span class="tm-shortcut-description">Clear text</span>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE TOOLMINT SECTION -->
+        <section class="tm-why-choose">
+            <div class="tm-container">
+                <div class="tm-section-header">
+                    <h2 class="tm-section-title">Why Choose ToolMint?</h2>
+                    <p class="tm-section-description">Trusted by thousands of users worldwide</p>
+                </div>
+
+                <div class="tm-features-grid">
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">💰</div>
+                        <h3 class="tm-feature-title">100% Free Tools</h3>
+                        <p class="tm-feature-description">All tools are completely free to use. No hidden fees or premium upgrades required.</p>
+                    </article>
+
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">🔐</div>
+                        <h3 class="tm-feature-title">No Registration</h3>
+                        <p class="tm-feature-description">Start using tools immediately without creating an account or sharing personal information.</p>
+                    </article>
+
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">⚡</div>
+                        <h3 class="tm-feature-title">Lightning Fast</h3>
+                        <p class="tm-feature-description">Get instant results with our optimized, high-performance processing engine.</p>
+                    </article>
+
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">🛡️</div>
+                        <h3 class="tm-feature-title">Privacy Focused</h3>
+                        <p class="tm-feature-description">Your data is never stored or shared. Everything is processed locally on your device.</p>
+                    </article>
+
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">🎯</div>
+                        <h3 class="tm-feature-title">Easy to Use</h3>
+                        <p class="tm-feature-description">Intuitive interfaces designed for everyone, from beginners to advanced users.</p>
+                    </article>
+
+                    <article class="tm-feature-card">
+                        <div class="tm-feature-icon">📱</div>
+                        <h3 class="tm-feature-title">Works on Any Device</h3>
+                        <p class="tm-feature-description">Seamlessly use ToolMint on desktop, tablet, or mobile devices. No app installation needed.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SECTION -->
+        <section class="tm-how-it-works">
+            <div class="tm-container">
+                <div class="tm-section-header">
+                    <h2 class="tm-section-title">How It Works</h2>
+                    <p class="tm-section-description">Three simple steps to get started</p>
+                </div>
+
+                <div class="tm-steps-container">
+                    <div class="tm-step">
+                        <div class="tm-step-number">1</div>
+                        <h3 class="tm-step-title">Choose a Tool</h3>
+                        <p class="tm-step-description">Browse our extensive collection of 100+ free tools and select the one you need.</p>
+                    </div>
+
+                    <div class="tm-step-divider"></div>
+
+                    <div class="tm-step">
+                        <div class="tm-step-number">2</div>
+                        <h3 class="tm-step-title">Enter Your Content</h3>
+                        <p class="tm-step-description">Paste or type your text, upload a file, or provide the necessary input data.</p>
+                    </div>
+
+                    <div class="tm-step-divider"></div>
+
+                    <div class="tm-step">
+                        <div class="tm-step-number">3</div>
+                        <h3 class="tm-step-title">Get Instant Results</h3>
+                        <p class="tm-step-description">Receive immediate results, download, copy, or save your output instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO CONTENT / ABOUT TOOLMINT SECTION -->
+        <section class="tm-about-content">
+            <div class="tm-container">
+                <div class="tm-content-wrapper">
+                    <h2 class="tm-section-title">About ToolMint</h2>
+                    
+                    <div class="tm-content-section">
+                        <h3>What is ToolMint?</h3>
+                        <p>
+                            ToolMint is a comprehensive platform of free online tools designed to streamline your daily workflows. Whether you're a content creator, developer, student, or professional, ToolMint provides simple yet powerful utilities to help you work faster and smarter. Our tools cover text processing, SEO analysis, grammar checking, image manipulation, coding utilities, and much more.
+                        </p>
+                    </div>
+
+                    <div class="tm-content-section">
+                        <h3>Who is ToolMint For?</h3>
+                        <p>
+                            ToolMint is built for everyone. Content writers use our tools to optimize their articles. Students rely on our grammar checkers and word counters for their assignments. Developers use our conversion tools and code formatters. SEO professionals analyze keyword density and content metrics. Teachers evaluate student work. If you work with text, data, or content in any form, ToolMint has a tool for you.
+                        </p>
+                    </div>
+
+                    <div class="tm-content-section">
+                        <h3>Why Free Online Tools Matter</h3>
+                        <p>
+                            Time is valuable, and productivity tools shouldn't cost you money. Free online tools democratize access to powerful utilities that were once available only to professionals with expensive software. They eliminate installation hassles, work on any device with internet access, and provide instant results without steep learning curves. ToolMint exists to provide exactly this—accessible, powerful tools for everyone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="tm-faq">
+            <div class="tm-container">
+                <div class="tm-section-header">
+                    <h2 class="tm-section-title">Frequently Asked Questions</h2>
+                    <p class="tm-section-description">Find answers to common questions about ToolMint</p>
+                </div>
+
+                <div class="tm-faq-container">
+                    <details class="tm-faq-item" id="faq-1">
+                        <summary class="tm-faq-question">
+                            <span class="tm-faq-icon">+</span>
+                            Is ToolMint really free?
+                        </summary>
+                        <div class="tm-faq-answer">
+                            <p>Yes, absolutely. All tools on ToolMint are 100% free to use. There are no hidden fees, premium upgrades, or paywalls. We believe quality tools should be accessible to everyone.</p>
+                        </div>
+                    </details>
+
+                    <details class="tm-faq-item" id="faq-2">
+                        <summary class="tm-faq-question">
+                            <span class="tm-faq-icon">+</span>
+                            Do I need to create an account or sign up?
+                        </summary>
+                        <div class="tm-faq-answer">
+                            <p>No signup required. ToolMint tools work immediately without registration. You can start using any tool right away without sharing personal information or creating passwords.</p>
+                        </div>
+                    </details>
+
+                    <details class="tm-faq-item" id="faq-3">
+                        <summary class="tm-faq-question">
+                            <span class="tm-faq-icon">+</span>
+                            Is my data private and secure?
+                        </summary>
+                        <div class="tm-faq-answer">
+                            <p>Yes, your privacy is our priority. Data entered into ToolMint tools is processed locally on your device and is never stored on our servers or shared with third parties. Everything happens in your browser.</p>
+                        </div>
+                    </details>
+
+                    <details class="tm-faq-item" id="faq-4">
+                        <summary class="tm-faq-question">
+                            <span class="tm-faq-icon">+</span>
+                            Can I use ToolMint on mobile devices?
+                        </summary>
+                        <div class="tm-faq-answer">
+                            <p>Absolutely. ToolMint works seamlessly on desktop computers, tablets, and smartphones. All tools are responsive and optimized for mobile use. No app installation is necessary.</p>
+                        </div>
+                    </details>
+
+                    <details class="tm-faq-item" id="faq-5">
+                        <summary class="tm-faq-question">
+                            <span class="tm-faq-icon">+</span>
+                            What kinds of tools do you offer?
+                        </summary>
+                        <div class="tm-faq-answer">
+                            <p>ToolMint offers over 100 free tools across multiple categories including Text Tools, SEO Tools, Writing Tools, Grammar Tools, Image Tools, Developer Tools, Calculators, and Conversion Tools. New tools are added regularly.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA SECTION -->
+        <section class="tm-final-cta">
+            <div class="tm-container">
+                <div class="tm-cta-content">
+                    <h2 class="tm-cta-title">Ready to Boost Your Productivity?</h2>
+                    <p class="tm-cta-description">
+                        Explore our full collection of tools and find exactly what you need to work faster and smarter.
+                    </p>
+                    <a href="#tools" class="tm-btn-primary-large">Explore All Tools</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="tm-footer">
+        <div class="tm-container">
+            <div class="tm-footer-grid">
+                <div class="tm-footer-column tm-footer-brand">
+                    <h3 class="tm-footer-logo">ToolMint</h3>
+                    <p class="tm-footer-description">
+                        ToolMint provides 100+ free online tools to make your work easier, faster, and smarter.
+                    </p>
+                </div>
+
+                <div class="tm-footer-column">
+                    <h4 class="tm-footer-title">Tool Categories</h4>
+                    <ul class="tm-footer-links">
+                        <li><a href="#">Text Tools</a></li>
+                        <li><a href="#">SEO Tools</a></li>
+                        <li><a href="#">Writing Tools</a></li>
+                        <li><a href="#">Developer Tools</a></li>
+                        <li><a href="#">Calculators</a></li>
+                        <li><a href="#">Converters</a></li>
+                    </ul>
+                </div>
+
+                <div class="tm-footer-column">
+                    <h4 class="tm-footer-title">Company</h4>
+                    <ul class="tm-footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Suggest a Tool</a></li>
+                    </ul>
+                </div>
+
+                <div class="tm-footer-column">
+                    <h4 class="tm-footer-title">Legal</h4>
+                    <ul class="tm-footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tm-footer-bottom">
+                <p class="tm-footer-copyright">
+                    © <span id="tm-current-year">2024</span> ToolMint. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <div id="tm-modal" class="tm-modal" role="dialog" aria-labelledby="tm-modal-title" aria-hidden="true">
+        <div class="tm-modal-overlay" id="tm-modal-overlay"></div>
+        <article class="tm-modal-content">
+            <div class="tm-modal-header">
+                <h3 id="tm-modal-title" class="tm-modal-title">Settings</h3>
+                <button id="tm-modal-close" class="tm-modal-close" aria-label="Close dialog">×</button>
+            </div>
+            <div class="tm-modal-body">
+                <div class="tm-setting-item">
+                    <label for="tm-setting-limit" class="tm-setting-label">Character Limit</label>
+                    <input type="number" id="tm-setting-limit" class="tm-setting-input" min="100" max="50000" value="5000" aria-label="Set character limit">
+                </div>
+                <div class="tm-setting-item">
+                    <label for="tm-setting-readspeed" class="tm-setting-label">Reading Speed (words per minute)</label>
+                    <input type="number" id="tm-setting-readspeed" class="tm-setting-input" min="100" max="500" value="200" aria-label="Set reading speed">
+                </div>
+            </div>
+            <div class="tm-modal-footer">
+                <button id="tm-modal-save" class="tm-button tm-button-primary" aria-label="Save settings">Save</button>
+                <button id="tm-modal-cancel" class="tm-button tm-button-secondary" aria-label="Cancel and close dialog">Cancel</button>
+            </div>
+        </article>
     </div>
-    <div class="tm-modal-body">
-      <section class="tm-help-section">
-        <h3>Keyboard Shortcuts</h3>
-        <ul>
-          <li><strong>Ctrl + K</strong> → Focus text area</li>
-          <li><strong>Ctrl + Enter</strong> → Copy statistics</li>
-          <li><strong>Ctrl + L</strong> → Clear text</li>
-        </ul>
-      </section>
-      <section class="tm-help-section">
-        <h3>How to Use</h3>
-        <ol>
-          <li>Type or paste text.</li>
-          <li>Statistics update automatically.</li>
-          <li>Copy your statistics.</li>
-          <li>Download text as TXT.</li>
-          <li>Change settings anytime.</li>
-        </ol>
-      </section>
-      <section class="tm-help-section">
-        <h3>Tips</h3>
-        <ul>
-          <li>Drag & Drop TXT files.</li>
-          <li>Character limit is customizable.</li>
-          <li>Reading time is estimated.</li>
-          <li>Everything works offline.</li>
-        </ul>
-      </section>
+
+    <div id="tm-help-modal" class="tm-modal" role="dialog" aria-hidden="true" aria-labelledby="tm-help-title">
+        <div id="tm-help-modal-overlay" class="tm-modal-overlay"></div>
+        <article class="tm-modal-content">
+            <div class="tm-modal-header">
+                <h2 id="tm-help-title">Help & Keyboard Shortcuts</h2>
+                <button id="tm-help-modal-close" class="tm-modal-close" aria-label="Close help modal">×</button>
+            </div>
+            <div class="tm-modal-body">
+                <section class="tm-help-section">
+                    <h3>Keyboard Shortcuts</h3>
+                    <ul>
+                        <li><strong>Ctrl + K</strong> → Focus text area</li>
+                        <li><strong>Ctrl + Enter</strong> → Copy statistics</li>
+                        <li><strong>Ctrl + L</strong> → Clear text</li>
+                    </ul>
+                </section>
+                <section class="tm-help-section">
+                    <h3>How to Use</h3>
+                    <ol>
+                        <li>Type or paste text.</li>
+                        <li>Statistics update automatically.</li>
+                        <li>Copy your statistics.</li>
+                        <li>Download text as TXT.</li>
+                        <li>Change settings anytime.</li>
+                    </ol>
+                </section>
+                <section class="tm-help-section">
+                    <h3>Tips</h3>
+                    <ul>
+                        <li>Drag & Drop TXT files.</li>
+                        <li>Character limit is customizable.</li>
+                        <li>Reading time is estimated.</li>
+                        <li>Everything works offline.</li>
+                    </ul>
+                </section>
+            </div>
+            <div class="tm-modal-footer">
+                <button id="tm-help-close-btn" class="tm-button tm-button-primary">Close</button>
+            </div>
+        </article>
     </div>
-    <div class="tm-modal-footer">
-      <button id="tm-help-close-btn" class="tm-button tm-button-primary">Close</button>
-    </div>
-  </article>
-</div>
 
-<div class="tm-sr-only" role="region" aria-live="polite" aria-atomic="true" id="tm-screen-reader-announcements"></div>
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="tm-toast-container" id="tm-toast-container" aria-live="assertive" aria-atomic="true"></div>
 
-  </section>
-  <script src="script.js"></script>
+    <!-- SCREEN READER ANNOUNCEMENTS -->
+    <div class="tm-sr-only" role="region" aria-live="polite" aria-atomic="true" id="tm-screen-reader-announcements"></div>
 
+    <script src="script.js"></script>
 </body>
 </html>
