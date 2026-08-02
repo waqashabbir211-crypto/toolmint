@@ -1520,3 +1520,103 @@ textarea {
         padding: 25px;
     }
 }
+/* ========================================
+   TOOLMINT BLOG SECTION
+======================================== */
+
+.tm-blog {
+    padding: 90px 0;
+    background: #ffffff;
+}
+
+.tm-blog .tm-section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tm-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.tm-blog-card {
+    background: #f8f9fc;
+    border: 1px solid #e2e6ee;
+    border-radius: 16px;
+    padding: 32px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tm-blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.tm-blog-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eeecff;
+    border-radius: 12px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.tm-blog-category {
+    display: inline-block;
+    background: #eeecff;
+    color: #5b46f5;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.tm-blog-title {
+    margin: 0 0 14px;
+    font-size: 21px;
+    line-height: 1.4;
+    color: #0f172a;
+}
+
+.tm-blog-description {
+    margin: 0 0 22px;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.tm-blog-link {
+    color: #5b46f5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tm-blog-link:hover {
+    text-decoration: underline;
+}
+
+/* Blog Responsive */
+@media (max-width: 900px) {
+    .tm-blog-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .tm-blog {
+        padding: 60px 0;
+    }
+
+    .tm-blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tm-blog-card {
+        padding: 25px;
+    }
+}
