@@ -1,537 +1,535 @@
-(function() {
-  'use strict';
+"use strict";
 
-  const state = {
-    characterLimit: 5000,
-    readingSpeed: 200,
-    shortcuts: {
-      'Ctrl+K': 'focusTextarea',
-      'Ctrl+Enter': 'copyStats',
-      'Ctrl+L': 'clearText'
+document.addEventListener('DOMContentLoaded', function() {
+    // ========================================
+    // WORD COUNTER ELEMENTS
+    // ========================================
+    const textarea = document.getElementById('tm-textarea');
+    const textareaWrapper = document.querySelector('.tm-textarea-wrapper');
+    const charCountSpan = document.getElementById('tm-char-count');
+    const charLimitSpan = document.getElementById('tm-char-limit');
+    const limitProgress = document.getElementById('tm-limit-progress');
+    const statWords = document.getElementById('tm-stat-words');
+    const statCharacters = document.getElementById('tm-stat-characters');
+    const statSpaces = document.getElementById('tm-stat-spaces');
+    const statSentences = document.getElementById('tm-stat-sentences');
+    const statParagraphs = document.getElementById('tm-stat-paragraphs');
+    const statReadtime = document.getElementById('tm-stat-readtime');
+    
+    // ========================================
+    // BUTTON ELEMENTS
+    // ========================================
+    const btnClear = document.getElementById('tm-btn-clear');
+    const btnCopy = document.getElementById('tm-btn-copy');
+    const btnDownload = document.getElementById('tm-btn-download');
+    const btnSettings = document.getElementById('tm-btn-settings');
+    const btnHelp = document.getElementById('tm-btn-help');
+    
+    // ========================================
+    // MODAL ELEMENTS
+    // ========================================
+    const settingsModal = document.getElementById('tm-modal');
+    const helpModal = document.getElementById('tm-help-modal');
+    const modalOverlay = document.getElementById('tm-modal-overlay');
+    const helpModalOverlay = document.getElementById('tm-help-modal-overlay');
+    const modalClose = document.getElementById('tm-modal-close');
+    const helpModalClose = document.getElementById('tm-help-modal-close');
+    const modalSave = document.getElementById('tm-modal-save');
+    const modalCancel = document.getElementById('tm-modal-cancel');
+    const helpCloseBtn = document.getElementById('tm-help-close-btn');
+    const settingLimit = document.getElementById('tm-setting-limit');
+    const settingReadspeed = document.getElementById('tm-setting-readspeed');
+    
+    // ========================================
+    // OTHER ELEMENTS
+    // ========================================
+    const dragDropArea = document.getElementById('tm-drag-drop-area');
+    const toastContainer = document.getElementById('tm-toast-container');
+    
+    // ========================================
+    // SETTINGS STATE
+    // ========================================
+    let characterLimit = 5000;
+    let readingSpeed = 200;
+    
+    // Initialize character limit on textarea
+    if (textarea) {
+        textarea.maxLength = characterLimit;
     }
-  };
-
-  const DOM = {
-    textarea: null,
-    charCount: null,
-    charLimit: null,
-    limitProgress: null,
-    statWords: null,
-    statCharacters: null,
-    statSpaces: null,
-    statSentences: null,
-    statParagraphs: null,
-    statReadtime: null,
-    btnClear: null,
-    btnCopy: null,
-    btnDownload: null,
-    btnSettings: null,
-    btnHelp: null,
-    modal: null,
-    modalOverlay: null,
-    modalClose: null,
-    modalSave: null,
-    modalCancel: null,
-    settingLimit: null,
-    settingReadSpeed: null,
-    toastContainer: null,
-    dragDropArea: null,
-    dragDropOverlay: null,
-    screenReaderAnnouncements: null,
-    limitBar: null,
-    helpModal: null,
-    helpModalOverlay: null,
-    helpModalClose: null,
-    helpCloseBtn: null,
-  };
-
-  function cacheDOM() {
-    DOM.textarea = document.getElementById('tm-textarea');
-
-    DOM.charCount = document.getElementById('tm-char-count');
-    DOM.charLimit = document.getElementById('tm-char-limit');
-    DOM.limitProgress = document.getElementById('tm-limit-progress');
-    DOM.statWords = document.getElementById('tm-stat-words');
-    DOM.statCharacters = document.getElementById('tm-stat-characters');
-    DOM.statSpaces = document.getElementById('tm-stat-spaces');
-    DOM.statSentences = document.getElementById('tm-stat-sentences');
-    DOM.statParagraphs = document.getElementById('tm-stat-paragraphs');
-    DOM.statReadtime = document.getElementById('tm-stat-readtime');
-    DOM.btnClear = document.getElementById('tm-btn-clear');
-    DOM.btnCopy = document.getElementById('tm-btn-copy');
-    DOM.btnDownload = document.getElementById('tm-btn-download');
-    DOM.btnSettings = document.getElementById('tm-btn-settings');
-    DOM.btnHelp = document.getElementById('tm-btn-help');
-    DOM.modal = document.getElementById('tm-modal');
-    DOM.modalOverlay = document.getElementById('tm-modal-overlay');
-    DOM.modalClose = document.getElementById('tm-modal-close');
-    DOM.modalSave = document.getElementById('tm-modal-save');
-    DOM.modalCancel = document.getElementById('tm-modal-cancel');
-    DOM.settingLimit = document.getElementById('tm-setting-limit');
-    DOM.settingReadSpeed = document.getElementById('tm-setting-readspeed');
-    DOM.toastContainer = document.getElementById('tm-toast-container');
-    DOM.dragDropArea = document.getElementById('tm-drag-drop-area');
-    DOM.dragDropOverlay = document.querySelector('.tm-drag-drop-overlay');
-    DOM.screenReaderAnnouncements = document.getElementById('tm-screen-reader-announcements');
-    DOM.limitBar = document.querySelector('.tm-character-limit');
-    DOM.helpModal = document.getElementById('tm-help-modal');
-    DOM.helpModalOverlay = document.getElementById('tm-help-modal-overlay');
-    DOM.helpModalClose = document.getElementById('tm-help-modal-close');
-    DOM.helpCloseBtn = document.getElementById('tm-help-close-btn');
-  }
-
-  function loadSettings() {
-    const saved = localStorage.getItem('tm-settings');
-    if (saved) {
-      try {
-        const settings = JSON.parse(saved);
-        state.characterLimit = settings.characterLimit || 5000;
-        state.readingSpeed = settings.readingSpeed || 200;
-        updateSettingsUI();
-      } catch (e) {
-        // Silent error handling
-      }
+    
+    // ========================================
+    // WORD COUNTER FUNCTIONS
+    // ========================================
+    function updateStatistics() {
+        const text = textarea.value;
+        
+        // Characters
+        const charCount = text.length;
+        statCharacters.textContent = charCount;
+        charCountSpan.textContent = charCount;
+        
+        // Update character limit bar
+        const progress = (charCount / characterLimit) * 100;
+        limitProgress.style.width = progress + '%';
+        limitProgress.setAttribute('aria-valuenow', charCount);
+        limitProgress.setAttribute('aria-valuemax', characterLimit);
+        charLimitSpan.textContent = characterLimit;
+        
+        // Spaces
+        const spaceCount = (text.match(/ /g) || []).length;
+        statSpaces.textContent = spaceCount;
+        
+        // Words
+        const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+        statWords.textContent = wordCount;
+        
+        // Sentences
+        const sentenceCount = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+        statSentences.textContent = text.trim() === '' ? 0 : sentenceCount;
+        
+        // Paragraphs
+        const paragraphCount = text.split(/\n\n+/).filter(p => p.trim().length > 0).length;
+        statParagraphs.textContent = text.trim() === '' ? 0 : paragraphCount;
+        
+        // Read time
+        const readTime = Math.ceil(wordCount / readingSpeed);
+        statReadtime.textContent = readTime === 0 ? '0 min' : readTime + ' min';
     }
-  }
-
-  function updateSettingsUI() {
-    if (DOM.settingLimit) DOM.settingLimit.value = state.characterLimit;
-    if (DOM.settingReadSpeed) DOM.settingReadSpeed.value = state.readingSpeed;
-    if (DOM.charLimit) DOM.charLimit.textContent = state.characterLimit;
-    if (DOM.limitProgress) DOM.limitProgress.setAttribute('aria-valuemax', state.characterLimit);
-  }
-
-  function countWords(text) {
-    const trimmed = text.trim();
-    if (!trimmed) return 0;
-    return trimmed.split(/\s+/).length;
-  }
-
-  function countCharacters(text) {
-    return text.length;
-  }
-
-  function countSpaces(text) {
-    return (text.match(/\s/g) || []).length;
-  }
-
-  function countSentences(text) {
-    const sentences = text.match(/[.!?]+/g) || [];
-    return sentences.length;
-  }
-
-  function countParagraphs(text) {
-    const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
-    return Math.max(paragraphs.length, text.trim().length > 0 ? 1 : 0);
-  }
-
-  function calculateReadTime(wordCount) {
-    const minutes = Math.ceil(wordCount / state.readingSpeed);
-    return minutes;
-  }
-
-  function updateStats() {
-    if (!DOM.textarea) return;
-
-    const text = DOM.textarea.value;
-    const wordCount = countWords(text);
-    const charCount = countCharacters(text);
-    const spaceCount = countSpaces(text);
-    const sentenceCount = countSentences(text);
-    const paragraphCount = countParagraphs(text);
-    const readTime = calculateReadTime(wordCount);
-
-    if (DOM.statWords) DOM.statWords.textContent = wordCount;
-    if (DOM.statCharacters) DOM.statCharacters.textContent = charCount;
-    if (DOM.statSpaces) DOM.statSpaces.textContent = spaceCount;
-    if (DOM.statSentences) DOM.statSentences.textContent = sentenceCount;
-    if (DOM.statParagraphs) DOM.statParagraphs.textContent = paragraphCount;
-    if (DOM.statReadtime) DOM.statReadtime.textContent = readTime + ' min';
-
-    updateCharacterLimit(charCount);
-    announceToScreenReader(`Updated: ${wordCount} words, ${charCount} characters`);
-  }
-
-  function updateCharacterLimit(charCount) {
-    if (DOM.charCount) DOM.charCount.textContent = charCount;
-
-    const percentage = (charCount / state.characterLimit) * 100;
-    if (DOM.limitProgress) DOM.limitProgress.style.width = Math.min(percentage, 100) + '%';
-    if (DOM.limitProgress) DOM.limitProgress.setAttribute('aria-valuenow', charCount);
-
-    if (DOM.limitBar) {
-      DOM.limitBar.classList.remove('tm-warning', 'tm-danger');
-      if (charCount > state.characterLimit) {
-        DOM.limitBar.classList.add('tm-danger');
-      } else if (charCount > state.characterLimit * 0.9) {
-        DOM.limitBar.classList.add('tm-warning');
-      }
-    }
-  }
-
-  function autoResizeTextarea() {
-    if (!DOM.textarea) return;
-    DOM.textarea.style.height = 'auto';
-    DOM.textarea.style.height = Math.max(DOM.textarea.scrollHeight, 300) + 'px';
-  }
-
-  function openModal() {
-    if (DOM.modal) {
-      DOM.modal.setAttribute('aria-hidden', 'false');
-      if (DOM.settingLimit) DOM.settingLimit.focus();
-    }
-  }
-
-  function closeModal() {
-    if (DOM.modal) DOM.modal.setAttribute('aria-hidden', 'true');
-    if (DOM.btnSettings) DOM.btnSettings.focus();
-  }
-
-  function openHelpModal() {
-    if (DOM.helpModal) {
-      DOM.helpModal.setAttribute('aria-hidden', 'false');
-    }
-  }
-
-  function closeHelpModal() {
-    if (DOM.helpModal) {
-      DOM.helpModal.setAttribute('aria-hidden', 'true');
-      if (DOM.btnHelp) DOM.btnHelp.focus();
-    }
-  }
-
-  function saveSettings() {
-    state.characterLimit = (DOM.settingLimit ? parseInt(DOM.settingLimit.value, 10) : 5000) || 5000;
-    state.readingSpeed = (DOM.settingReadSpeed ? parseInt(DOM.settingReadSpeed.value, 10) : 200) || 200;
-
-    try {
-      localStorage.setItem('tm-settings', JSON.stringify({
-        characterLimit: state.characterLimit,
-        readingSpeed: state.readingSpeed
-      }));
-    } catch (e) {
-      // Silent error handling
-    }
-
-    updateStats();
-    closeModal();
-    showToast('Settings saved successfully', 'success');
-  }
-
-  function clearText() {
-    if (!DOM.textarea) return;
-    if (DOM.textarea.value.length > 0) {
-      DOM.textarea.value = '';
-      updateStats();
-      DOM.textarea.focus();
-      showToast('Text cleared', 'success');
-      announceToScreenReader('Text has been cleared');
-    }
-  }
-
-  function fallbackCopy(text) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-9999px';
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      showToast('Statistics copied to clipboard', 'success');
-      announceToScreenReader('Statistics copied to clipboard');
-    } catch (e) {
-      showToast('Failed to copy statistics', 'error');
-      announceToScreenReader('Failed to copy statistics');
-    }
-    document.body.removeChild(textArea);
-  }
-
-  function copyStats() {
-    if (!DOM.statWords || !DOM.statCharacters || !DOM.statSpaces || !DOM.statSentences || !DOM.statParagraphs || !DOM.statReadtime) {
-      return;
-    }
-
-    const stats = `Word Counter Statistics
-Words: ${DOM.statWords.textContent}
-Characters: ${DOM.statCharacters.textContent}
-Spaces: ${DOM.statSpaces.textContent}
-Sentences: ${DOM.statSentences.textContent}
-Paragraphs: ${DOM.statParagraphs.textContent}
-Read Time: ${DOM.statReadtime.textContent}`;
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(stats).then(() => {
-        showToast('Statistics copied to clipboard', 'success');
-        announceToScreenReader('Statistics copied to clipboard');
-      }).catch(() => {
-        fallbackCopy(stats);
-      });
-    } else {
-      fallbackCopy(stats);
-    }
-  }
-
-  function downloadTxt() {
-    if (!DOM.textarea) return;
-
-    const text = DOM.textarea.value;
-    if (!text) {
-      showToast('Nothing to download', 'warning');
-      return;
-    }
-
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', 'toolmint-word-counter.txt');
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-    showToast('File downloaded successfully', 'success');
-    announceToScreenReader('File downloaded successfully');
-  }
-
-  function showToast(message, type = 'info') {
-    if (!DOM.toastContainer) return;
-
-    const toast = document.createElement('div');
-    toast.className = 'tm-toast tm-toast-' + type;
-
-    const iconMap = {
-      success: '✓',
-      error: '✕',
-      warning: '⚠',
-      info: 'ℹ'
-    };
-
-    toast.innerHTML = `<span class="tm-toast-icon">${iconMap[type]}</span><span>${message}</span>`;
-    DOM.toastContainer.appendChild(toast);
-
-    setTimeout(() => {
-      toast.classList.add('tm-toast-exit');
-      setTimeout(() => {
-        if (DOM.toastContainer && toast.parentNode === DOM.toastContainer) {
-          DOM.toastContainer.removeChild(toast);
-        }
-      }, 300);
-    }, 3000);
-  }
-
-  function announceToScreenReader(message) {
-    if (DOM.screenReaderAnnouncements) {
-      DOM.screenReaderAnnouncements.textContent = message;
-      setTimeout(() => {
-        DOM.screenReaderAnnouncements.textContent = '';
-      }, 1000);
-    }
-  }
-
-  function setupDragDrop() {
-    const dragDropArea = DOM.dragDropArea;
-    const dragDropOverlay = DOM.dragDropOverlay;
-
-    if (!dragDropArea) return;
-
-    dragDropArea.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (dragDropOverlay) dragDropOverlay.classList.add('tm-active');
-    });
-
-    dragDropArea.addEventListener('dragleave', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (dragDropOverlay) dragDropOverlay.classList.remove('tm-active');
-    });
-
-    dragDropArea.addEventListener('drop', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (dragDropOverlay) dragDropOverlay.classList.remove('tm-active');
-
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        const file = files[0];
-        if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            if (DOM.textarea) {
-              DOM.textarea.value = event.target.result;
-              updateStats();
-              autoResizeTextarea();
-              showToast('File loaded successfully', 'success');
-              announceToScreenReader('File loaded successfully');
+    
+    // Real-time statistics update and character limit enforcement
+    if (textarea) {
+        textarea.addEventListener('input', function() {
+            if (this.value.length > characterLimit) {
+                this.value = this.value.substring(0, characterLimit);
             }
-          };
-          reader.onerror = () => {
-            showToast('Failed to read file', 'error');
-            announceToScreenReader('Failed to read file');
-          };
-          reader.readAsText(file);
-        } else {
-          showToast('Please drop a text file', 'warning');
-          announceToScreenReader('Please drop a text file');
-        }
-      }
-    });
-  }
-
-  function setupKeyboardShortcuts() {
-    document.addEventListener('keydown', (e) => {
-      const isCtrl = e.ctrlKey || e.metaKey;
-
-      if (isCtrl && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        if (DOM.textarea) DOM.textarea.focus();
-      } else if (isCtrl && e.key === 'Enter') {
-        e.preventDefault();
-        copyStats();
-      } else if (isCtrl && e.key.toLowerCase() === 'l') {
-        e.preventDefault();
-        clearText();
-      }
-    });
-  }
-
-  function enforceCharacterLimit() {
-    if (!DOM.textarea) return;
-    if (DOM.textarea.value.length > state.characterLimit) {
-      DOM.textarea.value = DOM.textarea.value.substring(0, state.characterLimit);
-      updateStats();
-    }
-  }
-
-  function setupEventListeners() {
-    if (DOM.textarea) {
-      DOM.textarea.addEventListener('input', updateStats);
-      DOM.textarea.addEventListener('input', autoResizeTextarea);
-      DOM.textarea.addEventListener('input', enforceCharacterLimit);
-      DOM.textarea.addEventListener('paste', (e) => {
-        setTimeout(() => {
-          enforceCharacterLimit();
-        }, 0);
-      });
-    }
-
-    if (DOM.btnClear) DOM.btnClear.addEventListener('click', clearText);
-    if (DOM.btnCopy) DOM.btnCopy.addEventListener('click', copyStats);
-    if (DOM.btnDownload) DOM.btnDownload.addEventListener('click', downloadTxt);
-    if (DOM.btnSettings) DOM.btnSettings.addEventListener('click', openModal);
-    if (DOM.btnHelp) DOM.btnHelp.addEventListener('click', showHelpModal);
-
-    if (DOM.modalClose) DOM.modalClose.addEventListener('click', closeModal);
-    if (DOM.modalCancel) DOM.modalCancel.addEventListener('click', closeModal);
-    if (DOM.modalSave) DOM.modalSave.addEventListener('click', saveSettings);
-
-    if (DOM.modalOverlay) {
-      DOM.modalOverlay.addEventListener('click', (e) => {
-        if (e.target === DOM.modalOverlay) {
-          closeModal();
-        }
-      });
-    }
-
-    if (DOM.modal) {
-      DOM.modal.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeModal();
-        }
-
-        if (e.key === 'Tab') {
-          const focusableElements = DOM.modal.querySelectorAll('button, input, [tabindex]');
-          const firstElement = focusableElements[0];
-          const lastElement = focusableElements[focusableElements.length - 1];
-
-          if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-              e.preventDefault();
-              lastElement.focus();
-            }
-          } else {
-            if (document.activeElement === lastElement) {
-              e.preventDefault();
-              firstElement.focus();
-            }
-          }
-        }
-      });
-    }
-
-    if (DOM.helpModal) {
-      if (DOM.helpModalClose) {
-        DOM.helpModalClose.addEventListener('click', closeHelpModal);
-      }
-
-      if (DOM.helpCloseBtn) {
-        DOM.helpCloseBtn.addEventListener('click', closeHelpModal);
-      }
-
-      if (DOM.helpModalOverlay) {
-        DOM.helpModalOverlay.addEventListener('click', (e) => {
-          if (e.target === DOM.helpModalOverlay) {
-            closeHelpModal();
-          }
+            updateStatistics();
         });
-      }
+        textarea.addEventListener('change', updateStatistics);
+    }
+    
+    // ========================================
+    // CLEAR BUTTON
+    // ========================================
+    if (btnClear) {
+        btnClear.addEventListener('click', function() {
+            textarea.value = '';
+            updateStatistics();
+            textarea.focus();
+            showToast('Text cleared');
+        });
+    }
+    
+    // ========================================
+    // COPY STATS BUTTON
+    // ========================================
+    if (btnCopy) {
+        btnCopy.addEventListener('click', function() {
+            const stats = `Words: ${statWords.textContent}
+Characters: ${statCharacters.textContent}
+Spaces: ${statSpaces.textContent}
+Sentences: ${statSentences.textContent}
+Paragraphs: ${statParagraphs.textContent}
+Read Time: ${statReadtime.textContent}`;
+            
+            navigator.clipboard.writeText(stats).then(() => {
+                showToast('Statistics copied to clipboard');
+            }).catch(() => {
+                showToast('Failed to copy statistics');
+            });
+        });
+    }
+    
+    // ========================================
+    // DOWNLOAD BUTTON
+    // ========================================
+    if (btnDownload) {
+        btnDownload.addEventListener('click', function() {
+            const text = textarea.value;
+            const stats = `=== WORD COUNTER REPORT ===
+Generated: ${new Date().toLocaleString()}
 
-      DOM.helpModal.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeHelpModal();
+STATISTICS:
+Words: ${statWords.textContent}
+Characters: ${statCharacters.textContent}
+Spaces: ${statSpaces.textContent}
+Sentences: ${statSentences.textContent}
+Paragraphs: ${statParagraphs.textContent}
+Read Time: ${statReadtime.textContent}
+
+========================
+TEXT CONTENT
+========================
+
+${text}`;
+            
+            const blob = new Blob([stats], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'word-count-report.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Report downloaded');
+        });
+    }
+    
+    // ========================================
+    // MODAL MANAGEMENT
+    // ========================================
+    function openModal(modal) {
+        if (modal) {
+            modal.setAttribute('aria-hidden', 'false');
         }
-      });
     }
-
-    if (DOM.settingLimit) {
-      DOM.settingLimit.addEventListener('change', (e) => {
-        const value = parseInt(e.target.value, 10);
-        if (value < 100) DOM.settingLimit.value = 100;
-        if (value > 50000) DOM.settingLimit.value = 50000;
-      });
+    
+    function closeModal(modal) {
+        if (modal) {
+            modal.setAttribute('aria-hidden', 'true');
+        }
     }
-
-    if (DOM.settingReadSpeed) {
-      DOM.settingReadSpeed.addEventListener('change', (e) => {
-        const value = parseInt(e.target.value, 10);
-        if (value < 100) DOM.settingReadSpeed.value = 100;
-        if (value > 500) DOM.settingReadSpeed.value = 500;
-      });
+    
+    // ========================================
+    // SETTINGS MODAL
+    // ========================================
+    if (btnSettings) {
+        btnSettings.addEventListener('click', function() {
+            settingLimit.value = characterLimit;
+            settingReadspeed.value = readingSpeed;
+            openModal(settingsModal);
+        });
     }
-  }
-
-  function showHelpModal() {
-    const helpContent = `Keyboard Shortcuts:
-Ctrl+K - Focus text area
-Ctrl+Enter - Copy statistics
-Ctrl+L - Clear text
-
-Tips:
-- Drag and drop text files to load content
-- Use Settings to customize character limit and reading speed
-- Statistics update in real-time as you type`;
-
-    if (DOM.helpModal) {
-      openHelpModal();
-    } else {
-      showToast('Help: ' + helpContent.split('\n')[0], 'info');
-      announceToScreenReader(helpContent);
+    
+    if (modalClose) {
+        modalClose.addEventListener('click', function() {
+            closeModal(settingsModal);
+        });
     }
-  }
-
-  function init() {
-    cacheDOM();
-    loadSettings();
-    updateStats();
-    setupEventListeners();
-    setupKeyboardShortcuts();
-    setupDragDrop();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
+    
+    if (modalCancel) {
+        modalCancel.addEventListener('click', function() {
+            closeModal(settingsModal);
+        });
+    }
+    
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function() {
+            closeModal(settingsModal);
+        });
+    }
+    
+    if (modalSave) {
+        modalSave.addEventListener('click', function() {
+            const newLimit = parseInt(settingLimit.value) || 5000;
+            const newSpeed = parseInt(settingReadspeed.value) || 200;
+            
+            if (newLimit >= 100 && newLimit <= 50000) {
+                characterLimit = newLimit;
+                if (textarea) {
+                    textarea.maxLength = newLimit;
+                    if (textarea.value.length > newLimit) {
+                        textarea.value = textarea.value.substring(0, newLimit);
+                    }
+                }
+            }
+            if (newSpeed >= 100 && newSpeed <= 500) {
+                readingSpeed = newSpeed;
+            }
+            
+            closeModal(settingsModal);
+            updateStatistics();
+            showToast('Settings saved');
+        });
+    }
+    
+    // ========================================
+    // HELP MODAL
+    // ========================================
+    if (btnHelp) {
+        btnHelp.addEventListener('click', function() {
+            openModal(helpModal);
+        });
+    }
+    
+    if (helpModalClose) {
+        helpModalClose.addEventListener('click', function() {
+            closeModal(helpModal);
+        });
+    }
+    
+    if (helpCloseBtn) {
+        helpCloseBtn.addEventListener('click', function() {
+            closeModal(helpModal);
+        });
+    }
+    
+    if (helpModalOverlay) {
+        helpModalOverlay.addEventListener('click', function() {
+            closeModal(helpModal);
+        });
+    }
+    
+    // ========================================
+    // ESCAPE KEY CLOSES MODALS
+    // ========================================
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal(settingsModal);
+            closeModal(helpModal);
+        }
+    });
+    
+    // ========================================
+    // KEYBOARD SHORTCUTS
+    // ========================================
+    document.addEventListener('keydown', function(e) {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const modifier = isMac ? e.metaKey : e.ctrlKey;
+        
+        if (modifier && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (textarea) {
+                textarea.focus();
+            }
+        }
+        
+        if (modifier && e.key === 'Enter') {
+            e.preventDefault();
+            if (btnCopy) {
+                btnCopy.click();
+            }
+        }
+        
+        if (modifier && e.key.toLowerCase() === 'l') {
+            e.preventDefault();
+            if (btnClear) {
+                btnClear.click();
+            }
+        }
+    });
+    
+    // ========================================
+    // DRAG AND DROP
+    // ========================================
+    function setupDragAndDrop() {
+        if (!textareaWrapper || !textarea) return;
+        
+        textareaWrapper.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dragDropArea) {
+                dragDropArea.classList.add('active');
+            }
+        });
+        
+        textareaWrapper.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dragDropArea) {
+                dragDropArea.classList.add('active');
+            }
+        });
+        
+        textareaWrapper.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dragDropArea) {
+                dragDropArea.classList.remove('active');
+            }
+        });
+        
+        textareaWrapper.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dragDropArea) {
+                dragDropArea.classList.remove('active');
+            }
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                
+                if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        let content = event.target.result;
+                        if (content.length > characterLimit) {
+                            content = content.substring(0, characterLimit);
+                        }
+                        textarea.value = content;
+                        updateStatistics();
+                        showToast('File loaded successfully');
+                    };
+                    reader.onerror = function() {
+                        showToast('Failed to read file');
+                    };
+                    reader.readAsText(file);
+                } else {
+                    showToast('Please drop a .txt file');
+                }
+            }
+        });
+    }
+    
+    // ========================================
+    // TOAST NOTIFICATIONS
+    // ========================================
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'tm-toast';
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        toast.textContent = message;
+        
+        if (toastContainer) {
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('tm-toast-exit');
+                setTimeout(() => {
+                    if (toastContainer.contains(toast)) {
+                        toastContainer.removeChild(toast);
+                    }
+                }, 300);
+            }, 2000);
+        }
+    }
+    
+    // ========================================
+    // HOMEPAGE TOOL SEARCH
+    // ========================================
+    const heroSearchInput = document.getElementById('tm-hero-search-input');
+    const btnHeroSearch = document.getElementById('tm-btn-hero-search');
+    const toolCards = document.querySelectorAll('.tm-tool-card');
+    const toolsGrid = document.querySelector('.tm-tools-grid');
+    
+    function filterTools(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        let matchCount = 0;
+        
+        toolCards.forEach(card => {
+            const name = card.querySelector('.tm-tool-name')?.textContent.toLowerCase() || '';
+            const description = card.querySelector('.tm-tool-description')?.textContent.toLowerCase() || '';
+            const category = card.querySelector('.tm-tool-category')?.textContent.toLowerCase() || '';
+            
+            const matches = name.includes(term) || description.includes(term) || category.includes(term);
+            
+            if (matches) {
+                card.style.display = '';
+                matchCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        let noResultsMsg = document.getElementById('tm-no-results');
+        
+        if (matchCount === 0 && term !== '') {
+            if (!noResultsMsg && toolsGrid) {
+                noResultsMsg = document.createElement('div');
+                noResultsMsg.id = 'tm-no-results';
+                noResultsMsg.className = 'tm-no-results';
+                toolsGrid.appendChild(noResultsMsg);
+            }
+            if (noResultsMsg) {
+                noResultsMsg.textContent = `No tools found matching "${searchTerm}". Try a different search.`;
+            }
+        } else if (noResultsMsg && noResultsMsg.parentNode) {
+            noResultsMsg.parentNode.removeChild(noResultsMsg);
+        }
+    }
+    
+    if (heroSearchInput) {
+        heroSearchInput.addEventListener('input', function() {
+            filterTools(this.value);
+        });
+        
+        heroSearchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                filterTools(this.value);
+            }
+        });
+    }
+    
+    if (btnHeroSearch) {
+        btnHeroSearch.addEventListener('click', function() {
+            if (heroSearchInput) {
+                filterTools(heroSearchInput.value);
+            }
+        });
+    }
+    
+    // ========================================
+    // MOBILE NAVIGATION
+    // ========================================
+    const mobileMenuBtn = document.getElementById('tm-mobile-menu-btn');
+    const navMain = document.getElementById('tm-nav-main');
+    const navLinks = document.querySelectorAll('.tm-nav-link');
+    
+    function closeMobileMenu() {
+        if (mobileMenuBtn && navMain) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            navMain.style.display = '';
+            navMain.style.position = '';
+            navMain.style.top = '';
+            navMain.style.left = '';
+            navMain.style.right = '';
+            navMain.style.backgroundColor = '';
+            navMain.style.borderBottom = '';
+            navMain.style.padding = '';
+            navMain.style.zIndex = '';
+        }
+    }
+    
+    if (mobileMenuBtn && navMain) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            
+            if (!isOpen) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                navMain.style.display = 'flex';
+                navMain.style.flexDirection = 'column';
+                navMain.style.position = 'absolute';
+                navMain.style.top = '100%';
+                navMain.style.left = '0';
+                navMain.style.right = '0';
+                navMain.style.backgroundColor = '#FFFFFF';
+                navMain.style.borderBottom = '1px solid #E5E7EB';
+                navMain.style.padding = '16px';
+                navMain.style.zIndex = '99';
+            } else {
+                closeMobileMenu();
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                closeMobileMenu();
+            });
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+                closeMobileMenu();
+            }
+        });
+    }
+    
+    // ========================================
+    // FOOTER YEAR
+    // ========================================
+    const currentYearSpan = document.getElementById('tm-current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+    
+    // ========================================
+    // INITIALIZE
+    // ========================================
+    setupDragAndDrop();
+    if (textarea) {
+        updateStatistics();
+    }
+});
