@@ -21,7 +21,7 @@
                     <a href="#categories" class="tm-nav-link">Categories</a>
                     <a href="#" class="tm-nav-link">Blog</a>
                     <a href="#about" class="tm-nav-link">About</a>
-                    <a href="#" class="tm-nav-link">Contact</a>
+                    <a href="#contact" class="tm-nav-link">Contact</a>
                 </nav>
 
                 <button class="tm-btn-all-tools" id="tm-btn-all-tools">All Tools</button>
@@ -412,7 +412,96 @@
                 </div>
             </div>
         </section>
+<section class="tm-contact" id="contact">
+    <div class="tm-container">
+        <div class="tm-section-header">
+            <h2 class="tm-section-title">Contact ToolMint</h2>
+            <p class="tm-section-description">
+                Have questions or suggestions? We'd love to hear from you. Get in touch with our team.
+            </p>
+        </div>
 
+        <div class="tm-contact-wrapper">
+            <form class="tm-contact-form" id="tm-contact-form" novalidate>
+                
+                <div class="tm-form-group">
+                    <label for="tm-contact-name" class="tm-label">Full Name</label>
+                    <input
+                        type="text"
+                        id="tm-contact-name"
+                        class="tm-input"
+                        name="name"
+                        placeholder="Your name"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="tm-form-group">
+                    <label for="tm-contact-email" class="tm-label">Email Address</label>
+                    <input
+                        type="email"
+                        id="tm-contact-email"
+                        class="tm-input"
+                        name="email"
+                        placeholder="your@email.com"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="tm-form-group">
+                    <label for="tm-contact-subject" class="tm-label">Subject</label>
+                    <input
+                        type="text"
+                        id="tm-contact-subject"
+                        class="tm-input"
+                        name="subject"
+                        placeholder="What is this about?"
+                        required
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="tm-form-group">
+                    <label for="tm-contact-message" class="tm-label">Message</label>
+                    <textarea
+                        id="tm-contact-message"
+                        class="tm-textarea-contact"
+                        name="message"
+                        placeholder="Tell us more..."
+                        rows="6"
+                        required
+                        aria-required="true"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="tm-button tm-button-primary tm-contact-submit"
+                >
+                    Send Message
+                </button>
+            </form>
+
+            <div class="tm-contact-info">
+                <div class="tm-contact-info-item">
+                    <h3 class="tm-contact-info-title">Response Time</h3>
+                    <p class="tm-contact-info-text">
+                        We typically respond within 24 hours during business days.
+                    </p>
+                </div>
+
+                <div class="tm-contact-info-item">
+                    <h3 class="tm-contact-info-title">Feedback</h3>
+                    <p class="tm-contact-info-text">
+                        Have tool suggestions? We'd love to hear what you'd like to see next.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
         <!-- FAQ SECTION -->
         <section class="tm-faq">
             <div class="tm-container">
