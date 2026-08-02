@@ -1407,3 +1407,116 @@ textarea {
         opacity: 0;
     }
 }
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+
+.tm-contact {
+    padding: 90px 0;
+    background: #f8faff;
+}
+
+.tm-contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+    align-items: start;
+}
+
+.tm-contact-form {
+    background: #ffffff;
+    padding: 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.tm-form-group {
+    margin-bottom: 24px;
+}
+
+.tm-label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.tm-input,
+.tm-textarea-contact {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #dbe1ea;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0f172a;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.tm-input:focus,
+.tm-textarea-contact:focus {
+    border-color: #6d3df5;
+    box-shadow: 0 0 0 3px rgba(109, 61, 245, 0.12);
+}
+
+.tm-textarea-contact {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.tm-contact-submit {
+    width: 100%;
+    margin-top: 5px;
+    padding: 14px 20px;
+}
+
+.tm-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tm-contact-info-item {
+    background: #ffffff;
+    padding: 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.tm-contact-info-title {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.tm-contact-info-text {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+/* Contact Responsive */
+@media (max-width: 768px) {
+    .tm-contact {
+        padding: 60px 0;
+    }
+
+    .tm-contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 35px;
+    }
+
+    .tm-contact-form {
+        padding: 25px;
+    }
+
+    .tm-contact-info-item {
+        padding: 25px;
+    }
+}
